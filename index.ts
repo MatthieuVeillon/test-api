@@ -1,15 +1,18 @@
 import fastify from 'fastify'
 
+const port = process.env.PORT || 3000;
+const host = `0.0.0.0`
+
 const server = fastify()
 
 server.get('/ping', async (request, reply) => {
     return 'pong\n'
 })
 
-server.listen({ port: 8000 }, (err, address) => {
+
+server.listen({ port:Number(port), host: '0.0.0.0' }, (err, address) => {
     if (err) {
-        console.error(err)
+        server.log.error(err)
         process.exit(1)
     }
-    console.log(`Server listening at ${address}`)
 })
